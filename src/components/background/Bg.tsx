@@ -2,10 +2,10 @@ import styled from "styled-components"
 import bg from "../../assets/images/bg-main-mobile.png"
 
 const BgDiv = styled.header`
+   position: relative;
    background-image: url(${bg});
    background-repeat: no-repeat;
    background-size: cover;
-   /* position: relative; */
    flex-direction: column;
    width:100%;
    height:30%;
