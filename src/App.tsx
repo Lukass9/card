@@ -7,9 +7,15 @@ import GlobalStyle from './globalStyle';
 import { Form } from './components/form/Form';
 
 const Wrapp = styled.main`
+  display: flex;
+  flex-flow: column;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+
+  @media(min-width: 536px ){
+    flex-flow: row;
+  }
 `
 function App() {
   return (

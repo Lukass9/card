@@ -6,20 +6,26 @@ const Back = styled.article`
     background-image: url(${img});
     background-repeat: no-repeat;
     background-size: contain;
-    width: 70%;
-    height: 70%;
-    top: 15%;
-    left: 25%;
+    width: 74.5%;
+    height: 40.836vw;
+    top: 3vw;
+    left: 23%;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    font-size: 16px;
+    @media(min-width: 536px ){
+        width: 447px;
+        height: 245px;
+        top:-20%;
+        left:70%;
+        font-size: 25px;
+    }
 `
 const CVC = styled.p`
+    position: relative;
     color: white;
-    font-family: 'Rubik', sans-serif;
-    font-size: .9em;
-    margin-right: 15%;
-    margin-bottom: 2%;
+    font-size: .7em;
+    left: 80%;
+    top: 45%;
 `
 interface Props {
 }

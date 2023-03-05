@@ -1,5 +1,4 @@
-import styled from "styled-components"
-import { Input, Label, Wrapp } from "./FormInput";
+import { DoubleInput, InputWrapp, Label, WrappDoubleInput } from "../Form.style";
 
 interface Props {
     name: string,
@@ -8,17 +7,9 @@ interface Props {
     label: string,
 }
 
-const InputWrapp = styled.div`
-    display: flex;
-`
-
-const DoubleInput = styled(Input)`
-    max-width: 20%;
-`
-
 export const FormDoubleInput: React.FC<Props> = ({name, type, name2, label }) => {
     return (
-        <Wrapp>
+        <WrappDoubleInput>
             <Label htmlFor={name}>{label}</Label>
             <InputWrapp>
                 <DoubleInput 
@@ -32,6 +23,6 @@ export const FormDoubleInput: React.FC<Props> = ({name, type, name2, label }) =>
                     placeholder={name2}
                     />
             </InputWrapp>
-        </Wrapp>
+        </WrappDoubleInput>
     )
 };

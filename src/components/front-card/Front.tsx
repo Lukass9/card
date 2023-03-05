@@ -4,20 +4,26 @@ import logo from "../../assets/images/card-logo.svg"
 
 
 const Front = styled.article`
-    background-image: url(${img});
+    background: url(${img});
     background-repeat: no-repeat;
-    background-size: contain;
-    width: 70%;
-    height: 70%;
-    top: -15%;
-    left: 5%;
-
+    background-size: cover;
+    width: 74.5%;
+    height: 40.836vw;
+    top: -15vw;
+    left: 3%;
     position: relative;
     display: flex;
     flex-flow: column;
     padding-left: 5%;
-    /* justify-content: center; */
-    /* align-items: center; */
+    font-size: 16px;
+
+    @media(min-width: 536px ){
+        width: 447px;
+        height: 245px;
+        top:-25%;
+        left:50%;
+        font-size: 25px;
+    }
 `
 const Logo = styled.img`
     align-self: flex-start;
@@ -28,23 +34,23 @@ const Logo = styled.img`
 const CardNumber = styled.p`
     color: white;   
     letter-spacing: .1em;
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin-top: 15%;
     margin-bottom: 0;
 `
 const Wrapp = styled.div`
     display: flex;
-    width: 90%;
+    width: 95%;
     justify-content: space-between;
     margin-top: 7%;
 `
 const Name = styled.p`
     color: white;   
-    font-size: .9em;
+    font-size: .5em;
 `
-const CVC = styled.p`
+const Data = styled.p`
     color: white;   
-    font-size: .9em;
+    font-size: .5em;
 `
 
 interface Props {
@@ -57,7 +63,7 @@ export const FrontCard: React.FC<Props> = (props) => {
             <CardNumber>0000 0000 0000 0000</CardNumber>
             <Wrapp>
                 <Name>JANE APPLESED</Name>
-                <CVC>00/00</CVC>
+                <Data>00/00</Data>
             </Wrapp>
         </Front>
     )
