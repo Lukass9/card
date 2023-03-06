@@ -5,6 +5,9 @@ interface PropsStyled {
     isSmall?: boolean,
 }
 
+
+///////////FORM/////////////////////
+
 export const FormCard = styled.form`
     display: flex;
     flex-flow: column;
@@ -44,6 +47,8 @@ export const Button = styled.button`
         margin-top: 3%;
     }
 `
+
+//////////////////////////////////
 
 export const Wrapp2 = styled.div<PropsStyled>`
     display: flex;
