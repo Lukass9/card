@@ -54,16 +54,27 @@ const Data = styled.p`
 `
 
 interface Props {
+    dataCard:{
+        "CARDHOLDER NAME": string,
+        "CARD NUMBER": string,
+        "MM": string,
+        "YY": string,
+    }
 }
 
-export const FrontCard: React.FC<Props> = (props) => {
+const defineCardNumber = (cardNumber: string): string =>{
+    const initialState = "0000 0000 0000 0000"
+    return (cardNumber + initialState.substring(cardNumber.length)).toUpperCase()
+}
+
+export const FrontCard: React.FC<Props> = ({dataCard}) => {
     return (
         <Front>
             <Logo src={logo} alt="logo"/>
-            <CardNumber>0000 0000 0000 0000</CardNumber>
+            <CardNumber>{defineCardNumber(dataCard["CARD NUMBER"])}</CardNumber>
             <Wrapp>
-                <Name>JANE APPLESED</Name>
-                <Data>00/00</Data>
+                <Name>{dataCard["CARDHOLDER NAME"].toUpperCase()}</Name>
+                <Data>{dataCard["MM"]}/{dataCard["YY"]}</Data>
             </Wrapp>
         </Front>
     )

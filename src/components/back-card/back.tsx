@@ -2,6 +2,9 @@ import styled from "styled-components"
 import img from "../../assets/images/bg-card-back.png"
 
 const Back = styled.article`
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     position: relative;
     background-image: url(${img});
     background-repeat: no-repeat;
@@ -24,16 +27,17 @@ const CVC = styled.p`
     position: relative;
     color: white;
     font-size: .7em;
-    left: 80%;
+    left: -10%;
     top: 45%;
 `
 interface Props {
+    cvc: string
 }
 
-export const BackCard: React.FC<Props> = (props) => {
+export const BackCard: React.FC<Props> = ({cvc}) => {
     return (
         <Back>
-            <CVC>000</CVC>
+            <CVC>{cvc}</CVC>
         </Back>
     )
 };
