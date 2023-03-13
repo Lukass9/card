@@ -1,6 +1,6 @@
 import { FieldErrors, Path, UseFormRegister } from "react-hook-form";
 import { InputOptions, Inputs } from "../Form";
-import { Input, Label, Wrapp2 } from "../Form.style";
+import { Input, Label, Wrapp2, Error } from "../Form.style";
 
 interface Props {
     name: Path<Inputs>,
@@ -23,8 +23,9 @@ export const FormInput: React.FC<Props> = ({errors, name, type, placeholder, isS
                 type={type}
                 maxLength={inputOptions.maxLength?.value}
                 placeholder={placeholder}
+                error={Boolean( errors[name] )}
                 />
-            {errors[name]?.message}
+            <Error>{errors[name]?.message}</Error>
         </Wrapp2>
     )
 };

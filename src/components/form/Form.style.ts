@@ -3,8 +3,8 @@ import styled from "styled-components"
 
 interface PropsStyled {
     isSmall?: boolean,
+    error?: boolean,
 }
-
 
 ///////////FORM/////////////////////
 
@@ -46,6 +46,11 @@ export const Button = styled.button`
         padding: 1%;
         margin-top: 3%;
     }
+
+`
+
+export const Error = styled.p`  
+    color:red;
 `
 
 //////////////////////////////////
@@ -74,6 +79,7 @@ export const Input = styled.input<PropsStyled>`
     border: 1px solid lightgray;
     border-radius: 10px;
     font-size: 1rem;
+    border:  ${props=> props.error? "1px solid red" : "1px solid lightgrey"};  
     
     ::placeholder{
         color: lightgray;
@@ -97,6 +103,6 @@ export const InputWrapp = styled.div`
     
 `
 
-export const DoubleInput = styled(Input)`
+export const DoubleInput = styled(Input)<PropsStyled>`
     max-width: 40%;
 `

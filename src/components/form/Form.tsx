@@ -24,33 +24,40 @@ export type InputOptions = {
     required?: string | boolean,
     minLength?: {
         value: number,
-        message: string
+        message: string,
     },
     maxLength?: {
         value: number,
-        message: string
-    }
+        message: string,
+    },
+    pattern?: {
+        value: RegExp,
+        message: string, 
+    },
     onChange?: (e:any) => void
 }
 
 const cardholderOptions: InputOptions = {
-    required: "wymagane jest to mordeczko",
+    required: "Can't be blank",
     minLength: {
         value: 19,
-        message: "minimum mordeczko to 19 znaczków"
+        message: "The minimum value is 19 characters"
     },
     maxLength : {
         value: 19,
-        message: "Ziomek ogarnij więcej nie możesz"
+        message: "The maximum value is 19 characters"
+    },
+    pattern: {
+        value: /[0-9]/,
+        message: 'Wrong format, numbers only' 
     },
     onChange: (e) => {
         spaceInCardNumber(e)
-        // console.log(e.target.value.length)
     }
 }
 
 const otherInputOptions: InputOptions = {
-    required: true
+    required: "Can't be blank"
 } 
 
 interface Props { 
@@ -67,7 +74,7 @@ interface Props {
 }
 
 export const Form: React.FC<Props> = ({changeData, dataCard}) => {
-    const { register, handleSubmit, watch, formState: { errors }} = useForm<Inputs>({mode: "onChange",  defaultValues:{
+    const { register, handleSubmit, watch, formState: { errors }} = useForm<Inputs>({mode: "onBlur",  defaultValues:{
         "CARDHOLDER NAME": "",
         "CARD NUMBER" : "",
         MM: "",
@@ -104,7 +111,8 @@ export const Form: React.FC<Props> = ({changeData, dataCard}) => {
                     <FormDoubleInput 
                         label="EXP. DATE (MM/YY)"
                         register={register} 
-                        required 
+                        errors={errors}
+                        inputOptions = {otherInputOptions}   
                         name="MM" 
                         name2="YY" 
                         type="text" />
