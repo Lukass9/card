@@ -1,11 +1,11 @@
 import './App.css';
 import Bg from './components/background/Bg';
-import styled, { ThemeProvider } from "styled-components"
+import styled from "styled-components"
 import BackCard from './components/back-card/back';
 import FrontCard from './components/front-card/Front';
 import GlobalStyle from './globalStyle';
 import { Form } from './components/form/Form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const Wrapp = styled.main`
   display: flex;

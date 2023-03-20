@@ -43,8 +43,8 @@ export const Button = styled.button`
     width: 100%;
 
     @media (min-width: 536px ){
-        padding: 1%;
-        margin-top: 3%;
+        padding: 3%;
+        margin-top: 3%;   
     }
 
 `

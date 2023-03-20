@@ -4,18 +4,19 @@ import { FormInput } from "./FormInput/FormInput";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { FormComplite } from "./FormComplite/FormComplite";
+import { AnimatePresence, motion } from "framer-motion";
 
-const spaceInCardNumber = (e: any) =>{
-    if( e.nativeEvent.inputType !== "deleteContentBackward" && e.target.name === "CARD NUMBER"){
-        if(e.target.value.length === 4) e.target.value = e.target.value + " "
-        else if(e.target.value.length === 9) e.target.value = e.target.value + " "
-        else if(e.target.value.length === 14) e.target.value = e.target.value + " "
-    } 
+const spaceInCardNumber = (e: any) => {
+    if (e.nativeEvent.inputType !== "deleteContentBackward" && e.target.name === "CARD NUMBER") {
+        if (e.target.value.length === 4) e.target.value = e.target.value + " "
+        else if (e.target.value.length === 9) e.target.value = e.target.value + " "
+        else if (e.target.value.length === 14) e.target.value = e.target.value + " "
+    }
 }
 
 export type Inputs = {
     "CARDHOLDER NAME": string,
-    "CARD NUMBER" : string,
+    "CARD NUMBER": string,
     MM: string,
     YY: string,
     CVC: string,
@@ -33,9 +34,9 @@ export type InputOptions = {
     },
     pattern?: {
         value: RegExp,
-        message: string, 
+        message: string,
     },
-    onChange?: (e:any) => void
+    onChange?: (e: any) => void
 }
 
 const cardholderOptions: InputOptions = {
@@ -44,13 +45,13 @@ const cardholderOptions: InputOptions = {
         value: 19,
         message: "The minimum value is 19 characters"
     },
-    maxLength : {
+    maxLength: {
         value: 19,
         message: "The maximum value is 19 characters"
     },
     pattern: {
         value: /(\d{4} ){3}\d{4}/,
-        message: 'Wrong format, numbers only' 
+        message: 'Wrong format, numbers only'
     },
     onChange: (e) => {
         spaceInCardNumber(e)
@@ -59,82 +60,103 @@ const cardholderOptions: InputOptions = {
 
 const otherInputOptions: InputOptions = {
     required: "Can't be blank"
-} 
+}
 
-interface Props { 
+interface Props {
     changeData: (
-        name: "CARDHOLDER NAME" | "CARD NUMBER" | "MM" | "YY" | "CVC" | undefined, 
-        newNumber :string
-        ) =>  void,
+        name: "CARDHOLDER NAME" | "CARD NUMBER" | "MM" | "YY" | "CVC" | undefined,
+        newNumber: string
+    ) => void,
 
-    dataCard:{
+    dataCard: {
         "CARDHOLDER NAME": string,
         "CARD NUMBER": string,
+        MM: string,
+        YY: string,
+        CVC: string
     }
 
 }
 
-export const Form: React.FC<Props> = ({changeData, dataCard}) => {
+export const Form: React.FC<Props> = ({ changeData, dataCard }) => {
     const [isSuccess, setIsSuccess] = useState(false)
+    const resetInput = () => {
+        console.log("czy to w ogóle się dzieje?")
+        setIsSuccess(false)
+    }
 
-    const { register, handleSubmit, watch, formState: { errors }} = useForm<Inputs>({mode: "onBlur",  defaultValues:{
-        "CARDHOLDER NAME": "",
-        "CARD NUMBER" : "",
-        MM: "",
-        YY: "",
-        CVC: "",
-    }});
-    const onSubmit: SubmitHandler<Inputs> = data =>setIsSuccess(true);
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>({
+        mode: "onBlur", defaultValues: {
+            "CARDHOLDER NAME": "",
+            "CARD NUMBER": "",
+            MM: "",
+            YY: "",
+            CVC: "",
+        }
+    });
+    const onSubmit: SubmitHandler<Inputs> = data => setIsSuccess(true);
 
-    useEffect(()=>{
-        const subscription = watch((data, {name, type}) => {
-            if (name!==undefined) changeData(name, data[name] as string)
+    useEffect(() => {
+        const subscription = watch((data, { name, type }) => {
+            if (name !== undefined) changeData(name, data[name] as string)
         })
-        return ()=> subscription.unsubscribe()
-    },[watch, dataCard])
+        return () => subscription.unsubscribe()
+    }, [watch, dataCard])
+
+    useEffect(() => {
+        setIsSuccess(isSuccess)
+    }, [isSuccess])
 
     return (
         <FormCard onSubmit={handleSubmit(onSubmit)}>
-            {isSuccess
-                ? 
-                    <FormComplite/>
-                :  
-                <FormWrapp>
-                    <FormInput
-                    register={register} 
-                    inputOptions = {otherInputOptions}
-                    errors={errors}
-                    name="CARDHOLDER NAME"
-                    type="text" 
-                    placeholder="e.g. Jane Applesed" />
-                    <FormInput 
-                    register={register} 
-                    inputOptions = {cardholderOptions} 
-                    errors={errors}
-                    name="CARD NUMBER" 
-                    type="text"
-                    placeholder="e.g. 1234 5678 9123 0000" />
-                    <Wrapp>
-                        <FormDoubleInput 
-                            label="EXP. DATE (MM/YY)"
-                            register={register} 
+            <h1>{isSuccess.toString()}</h1>
+            {/* <AnimatePresence mode="wait"> */}
+                {isSuccess
+                    ?
+                        <FormComplite resetInput={resetInput} />
+                    :
+                    <FormWrapp as={motion.div}
+                        key="form"
+                        initial={{ x: 100, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1, transition: { duration: .8 } }}
+                        exit={{ x: -100, opacity: 0, transition: { duration: .8 } }}
+                    >
+                        <FormInput
+                            register={register}
+                            inputOptions={otherInputOptions}
                             errors={errors}
-                            inputOptions = {otherInputOptions}   
-                            name="MM" 
-                            name2="YY" 
-                            type="text" />
-                        <FormInput 
-                            register={register} 
-                            inputOptions = {otherInputOptions}  
+                            name="CARDHOLDER NAME"
+                            type="text"
+                            placeholder="e.g. Jane Applesed" />
+                        <FormInput
+                            register={register}
+                            inputOptions={cardholderOptions}
                             errors={errors}
-                            isSmall={true} 
-                            name="CVC" 
-                            type="number" 
-                            placeholder="e.g. 123" />
-                    </Wrapp>
-                    <Button> Confirm </Button>
-                </FormWrapp>
-            }
+                            name="CARD NUMBER"
+                            type="text"
+                            placeholder="e.g. 1234 5678 9123 0000" />
+                        <Wrapp>
+                            <FormDoubleInput
+                                label="EXP. DATE (MM/YY)"
+                                register={register}
+                                errors={errors}
+                                inputOptions={otherInputOptions}
+                                name="MM"
+                                name2="YY"
+                                type="number" />
+                            <FormInput
+                                register={register}
+                                inputOptions={otherInputOptions}
+                                errors={errors}
+                                isSmall={true}
+                                name="CVC"
+                                type="number"
+                                placeholder="e.g. 123" />
+                        </Wrapp>
+                        <Button> Confirm </Button>
+                    </FormWrapp>
+                }
+            {/* </AnimatePresence> */}
         </FormCard>
     )
 };
