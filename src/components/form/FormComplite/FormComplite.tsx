@@ -1,7 +1,7 @@
 import CompliteIcon from "../../../assets/images/icon-complete.svg"
 import { Button } from "../Form.style";
 import styled from "styled-components";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Wrapp = styled.div`  
     display: flex;
@@ -48,13 +48,21 @@ export const FormComplite: React.FC<Props> = ({ resetInput }) => {
             animate={{ x: 0, opacity: 1, transition: { duration: .8 } }}
             exit={{ x: -100, opacity: 0, transition: { duration: .8 } }}
         >
-            <Img src={CompliteIcon} alt="CompliteIcon" />
+            <Img as={motion.img} 
+                src={CompliteIcon} 
+                alt="CompliteIcon" 
+                initial={{opacity: 0, scale: 0}}
+                animate={{opacity: 1, scale: 1,  transition: {
+                    delay: 0.6,
+                  },}}
+                />
             <H1>THANK YOU!</H1>
             <H2>We've added your card details</H2>
             <Button
                 as={motion.button}
                 onClick={resetInput}
                 whileTap={{ scale: 0.9 }}
+                type="submit"
             >
                 Continue
             </Button>

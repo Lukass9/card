@@ -1,4 +1,3 @@
-import './App.css';
 import Bg from './components/background/Bg';
 import styled from "styled-components"
 import BackCard from './components/back-card/back';

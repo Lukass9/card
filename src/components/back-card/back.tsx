@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import styled from "styled-components"
 import img from "../../assets/images/bg-card-back.png"
 
@@ -36,7 +37,19 @@ interface Props {
 
 export const BackCard: React.FC<Props> = ({cvc}) => {
     return (
-        <Back>
+        <Back as={motion.div}
+        animate={{
+                y:[-5,5,0],
+                x:[0,10],
+                rotate: ['1deg','-1deg'],
+            }}
+        transition={{
+                type: "tweet",
+                repeat: Infinity,
+                repeatType: "mirror",
+                duration: 5,
+            }}
+    >
             <CVC>{cvc}</CVC>
         </Back>
     )

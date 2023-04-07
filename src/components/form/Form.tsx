@@ -12,6 +12,12 @@ const spaceInCardNumber = (e: any) => {
         else if (e.target.value.length === 9) e.target.value = e.target.value + " "
         else if (e.target.value.length === 14) e.target.value = e.target.value + " "
     }
+    else if(e.nativeEvent.inputType === "deleteContentBackward"){
+        if (e.target.value.length === 4) e.target.value = e.target.value.substring(0,3) 
+        else if (e.target.value.length === 9) e.target.value = e.target.value.substring(0,8) 
+        else if (e.target.value.length === 14) e.target.value = e.target.value.substring(0,13) 
+        
+    }
 }
 
 export type Inputs = {
@@ -78,14 +84,8 @@ interface Props {
 
 }
 
-export const Form: React.FC<Props> = ({ changeData, dataCard }) => {
-    const [isSuccess, setIsSuccess] = useState(false)
-    const resetInput = () => {
-        console.log("czy to w ogóle się dzieje?")
-        setIsSuccess(false)
-    }
-
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>({
+export const Form: React.FC<Props> = ({ changeData, dataCard }) => {    
+    const { register, handleSubmit, watch, formState: { errors, isSubmitSuccessful}, reset } = useForm<Inputs>({
         mode: "onBlur", defaultValues: {
             "CARDHOLDER NAME": "",
             "CARD NUMBER": "",
@@ -94,7 +94,11 @@ export const Form: React.FC<Props> = ({ changeData, dataCard }) => {
             CVC: "",
         }
     });
-    const onSubmit: SubmitHandler<Inputs> = data => setIsSuccess(true);
+    const onSubmit: SubmitHandler<Inputs> = data => 
+        console.log(JSON.stringify(data));
+    const resetInput = () => {
+        reset()
+    }
 
     useEffect(() => {
         const subscription = watch((data, { name, type }) => {
@@ -103,15 +107,10 @@ export const Form: React.FC<Props> = ({ changeData, dataCard }) => {
         return () => subscription.unsubscribe()
     }, [watch, dataCard])
 
-    useEffect(() => {
-        setIsSuccess(isSuccess)
-    }, [isSuccess])
-
     return (
         <FormCard onSubmit={handleSubmit(onSubmit)}>
-            <h1>{isSuccess.toString()}</h1>
             {/* <AnimatePresence mode="wait"> */}
-                {isSuccess
+                {isSubmitSuccessful
                     ?
                         <FormComplite resetInput={resetInput} />
                     :

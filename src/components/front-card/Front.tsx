@@ -1,3 +1,4 @@
+import { motion } from "framer-motion"
 import styled from "styled-components"
 import img from "../../assets/images/bg-card-front.png"
 import logo from "../../assets/images/card-logo.svg"
@@ -69,7 +70,19 @@ const defineCardNumber = (cardNumber: string): string =>{
 
 export const FrontCard: React.FC<Props> = ({dataCard}) => {
     return (
-        <Front>
+        <Front as={motion.div}
+            animate={{
+                    y:[5,-5,0],
+                    x:[10,0],
+                    rotate: ['1deg','-1deg'],
+                }}
+            transition={{
+                    type: "tweet",
+                    repeat: Infinity,
+                    repeatType: "mirror",
+                    duration: 5,
+                }}
+        >
             <Logo src={logo} alt="logo"/>
             <CardNumber>{defineCardNumber(dataCard["CARD NUMBER"])}</CardNumber>
             <Wrapp>
