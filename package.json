@@ -1,5 +1,6 @@
 {
   "name": "card",
+  "homepage": "https://Lukass9.github.io/card/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,6 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,6 +48,7 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.26",
+    "gh-pages": "^6.0.0",
     "jest-watch-typeahead": "^0.6.5"
   }
 }

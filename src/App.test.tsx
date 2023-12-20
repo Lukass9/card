@@ -11,5 +11,4 @@ test('renders document', () => {
   expect( screen.getByText("CARD NUMBER") ).toBeInTheDocument();
   expect( screen.getByText("EXP. DATE (MM/YY)") ).toBeInTheDocument();
   expect( screen.getByText("CVC") ).toBeInTheDocument();
-  
 });
