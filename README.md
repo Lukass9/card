@@ -27,10 +27,10 @@
 - TypeScript - v4.9.5
 
 <div align="center">
-	<code><img width="20" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" title="React"/></code>
-    <code><img width="20" src="https://www.daggala.com/static/228867c3668e439101821568a8a03b54/ec333/sc.png" alt="styled components" title="Styled Components"/></code>
-    <code><img width="20" src="https://cdn.worldvectorlogo.com/logos/framer-motion.svg" alt="framer motion" title="Framer Motion"/></code>
-	<code><img width="20" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" alt="TypeScript" title="TypeScript"/></code>
+	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" alt="React" title="React"/></code>
+    <code><img width="50" src="https://www.daggala.com/static/228867c3668e439101821568a8a03b54/ec333/sc.png" alt="styled components" title="Styled Components"/></code>
+    <code><img width="50" src="https://cdn.worldvectorlogo.com/logos/framer-motion.svg" alt="framer motion" title="Framer Motion"/></code>
+	<code><img width="50" src="https://user-images.githubusercontent.com/25181517/183890598-19a0ac2d-e88a-4005-a8df-1ee36782fde1.png" alt="TypeScript" title="TypeScript"/></code>
 </div>
 
 ## Features
